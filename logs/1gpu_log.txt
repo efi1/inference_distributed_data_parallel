@@ -1,0 +1,2020 @@
+[33mTailing logs of the last job on cluster 'ddp-1gpu'...[0m
+Job ID not provided. Streaming the logs of the latest job.
+[2m├── [0m[2mWaiting for task resources on 1 node.[0m
+[2m└── [0mJob started. Streaming logs... [2m(Ctrl-C to exit log streaming; job will not be killed)[0m
+[36m(setup pid=3073)[0m Setup complete
+[36m(setup pid=3073)[0m Thu Jul 23 08:46:45 2026       
+[36m(setup pid=3073)[0m +-----------------------------------------------------------------------------------------+
+[36m(setup pid=3073)[0m | NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.1     |
+[36m(setup pid=3073)[0m +-----------------------------------------+------------------------+----------------------+
+[36m(setup pid=3073)[0m | GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+[36m(setup pid=3073)[0m | Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+[36m(setup pid=3073)[0m |                                         |                        |               MIG M. |
+[36m(setup pid=3073)[0m |=========================================+========================+======================|
+[36m(setup pid=3073)[0m |   0  NVIDIA H100 80GB HBM3          On  |   00000000:8D:00.0 Off |                    0 |
+[36m(setup pid=3073)[0m | N/A   37C    P0             72W /  700W |       0MiB /  81559MiB |      0%      Default |
+[36m(setup pid=3073)[0m |                                         |                        |             Disabled |
+[36m(setup pid=3073)[0m +-----------------------------------------+------------------------+----------------------+
+[36m(setup pid=3073)[0m 
+[36m(setup pid=3073)[0m +-----------------------------------------------------------------------------------------+
+[36m(setup pid=3073)[0m | Processes:                                                                              |
+[36m(setup pid=3073)[0m |  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+[36m(setup pid=3073)[0m |        ID   ID                                                               Usage      |
+[36m(setup pid=3073)[0m |=========================================================================================|
+[36m(setup pid=3073)[0m |  No running processes found                                                             |
+[36m(setup pid=3073)[0m +-----------------------------------------------------------------------------------------+
+[36m(nebius-ddp-training, pid=3073)[0m ++ echo 10.32.21.34
+[36m(nebius-ddp-training, pid=3073)[0m ++ head -n 1
+[36m(nebius-ddp-training, pid=3073)[0m + MASTER_ADDR=10.32.21.34
+[36m(nebius-ddp-training, pid=3073)[0m + MASTER_PORT=29500
+[36m(nebius-ddp-training, pid=3073)[0m + echo SKYPILOT_NODE_RANK=0
+[36m(nebius-ddp-training, pid=3073)[0m SKYPILOT_NODE_RANK=0
+[36m(nebius-ddp-training, pid=3073)[0m + echo SKYPILOT_NUM_NODES=1
+[36m(nebius-ddp-training, pid=3073)[0m SKYPILOT_NUM_NODES=1
+[36m(nebius-ddp-training, pid=3073)[0m + echo SKYPILOT_NUM_GPUS_PER_NODE=1
+[36m(nebius-ddp-training, pid=3073)[0m SKYPILOT_NUM_GPUS_PER_NODE=1
+[36m(nebius-ddp-training, pid=3073)[0m + echo SKYPILOT_NODE_IPS:
+[36m(nebius-ddp-training, pid=3073)[0m SKYPILOT_NODE_IPS:
+[36m(nebius-ddp-training, pid=3073)[0m + echo 10.32.21.34
+[36m(nebius-ddp-training, pid=3073)[0m 10.32.21.34
+[36m(nebius-ddp-training, pid=3073)[0m + echo MASTER_ADDR=10.32.21.34
+[36m(nebius-ddp-training, pid=3073)[0m MASTER_ADDR=10.32.21.34
+[36m(nebius-ddp-training, pid=3073)[0m ++ pwd
+[36m(nebius-ddp-training, pid=3073)[0m + echo PWD=/root/sky_workdir
+[36m(nebius-ddp-training, pid=3073)[0m PWD=/root/sky_workdir
+[36m(nebius-ddp-training, pid=3073)[0m + test -f train.py
+[36m(nebius-ddp-training, pid=3073)[0m + echo '=== Script verification ==='
+[36m(nebius-ddp-training, pid=3073)[0m === Script verification ===
+[36m(nebius-ddp-training, pid=3073)[0m + grep --color=auto -E 'n_layer|n_embd|n_head|n_positions' train.py
+[36m(nebius-ddp-training, pid=3073)[0m         n_positions=1024,        # GPT-2 standard context window length
+[36m(nebius-ddp-training, pid=3073)[0m         n_embd=1280,             # Hidden dimension size (GPT-2 base/small)
+[36m(nebius-ddp-training, pid=3073)[0m         n_layer=36,              # Number of transformer layers (GPT-2 base/small)
+[36m(nebius-ddp-training, pid=3073)[0m         n_head=20,               # Number of attention heads (GPT-2 base/small)
+[36m(nebius-ddp-training, pid=3073)[0m + echo PER_DEVICE_TRAIN_BATCH_SIZE=8
+[36m(nebius-ddp-training, pid=3073)[0m PER_DEVICE_TRAIN_BATCH_SIZE=8
+[36m(nebius-ddp-training, pid=3073)[0m + echo MAX_STEPS=500
+[36m(nebius-ddp-training, pid=3073)[0m MAX_STEPS=500
+[36m(nebius-ddp-training, pid=3073)[0m + echo ==========================
+[36m(nebius-ddp-training, pid=3073)[0m ==========================
+[36m(nebius-ddp-training, pid=3073)[0m + torchrun --nproc_per_node=1 --nnodes=1 --node_rank=0 --master_addr=10.32.21.34 --master_port=29500 train.py
+[36m(nebius-ddp-training, pid=3073)[0m /usr/local/lib/python3.12/dist-packages/torch/library.py:356: UserWarning: Warning only once for all operators,  other operators may also be overridden.
+[36m(nebius-ddp-training, pid=3073)[0m   Overriding a previously registered kernel for the same operator and the same dispatch key
+[36m(nebius-ddp-training, pid=3073)[0m   operator: flash_attn::_flash_attn_backward(Tensor dout, Tensor q, Tensor k, Tensor v, Tensor out, Tensor softmax_lse, Tensor(a6!)? dq, Tensor(a7!)? dk, Tensor(a8!)? dv, float dropout_p, float softmax_scale, bool causal, SymInt window_size_left, SymInt window_size_right, float softcap, Tensor? alibi_slopes, bool deterministic, Tensor? rng_state=None) -> Tensor
+[36m(nebius-ddp-training, pid=3073)[0m     registered at /usr/local/lib/python3.12/dist-packages/torch/_library/custom_ops.py:922
+[36m(nebius-ddp-training, pid=3073)[0m   dispatch key: ADInplaceOrView
+[36m(nebius-ddp-training, pid=3073)[0m   previous kernel: no debug info
+[36m(nebius-ddp-training, pid=3073)[0m        new kernel: registered at /usr/local/lib/python3.12/dist-packages/torch/_library/custom_ops.py:922 (Triggered internally at /opt/pytorch/pytorch/aten/src/ATen/core/dispatch/OperatorEntry.cpp:208.)
+[36m(nebius-ddp-training, pid=3073)[0m   self.m.impl(
+[36m(nebius-ddp-training, pid=3073)[0m [NCCL] Distributed training initialised
+[36m(nebius-ddp-training, pid=3073)[0m [NCCL] World size: 1
+[36m(nebius-ddp-training, pid=3073)[0m [NCCL] Backend: nccl
+[36m(nebius-ddp-training, pid=3073)[0m [NCCL] Master addr: 10.32.21.34
+[36m(nebius-ddp-training, pid=3073)[0m [NCCL] Master port: 29500
+[36m(nebius-ddp-training, pid=3073)[0m [Rank 0] Loading tokenizer: gpt2
+[36m(nebius-ddp-training, pid=3073)[0m Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[36m(nebius-ddp-training, pid=3073)[0m [Comm] Trainable parameters: 774,030,080
+[36m(nebius-ddp-training, pid=3073)[0m [Comm] Theoretical grad payload / step (fp32): 3,096,120,320 bytes
+[36m(nebius-ddp-training, pid=3073)[0m [Comm] Theoretical ring all-reduce bytes/GPU/step: 0 bytes
+[36m(nebius-ddp-training, pid=3073)[0m 
+Generating test split:   0%|          | 0/4358 [00:00<?, ? examples/s]
+Generating test split: 100%|██████████| 4358/4358 [00:00<00:00, 640731.10 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+Generating train split:   0%|          | 0/36718 [00:00<?, ? examples/s]
+Generating train split: 100%|██████████| 36718/36718 [00:00<00:00, 1319090.50 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+Generating validation split:   0%|          | 0/3760 [00:00<?, ? examples/s]
+Generating validation split: 100%|██████████| 3760/3760 [00:00<00:00, 987080.37 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:   0%|          | 0/36718 [00:00<?, ? examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:   3%|▎         | 1000/36718 [00:00<00:04, 8742.54 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:   5%|▌         | 2000/36718 [00:00<00:04, 8663.22 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  11%|█         | 4000/36718 [00:00<00:03, 9514.95 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  16%|█▋        | 6000/36718 [00:00<00:02, 10341.45 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  22%|██▏       | 8000/36718 [00:00<00:02, 9712.76 examples/s] 
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  25%|██▍       | 9000/36718 [00:00<00:02, 9724.03 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  30%|██▉       | 11000/36718 [00:01<00:02, 9760.14 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  35%|███▌      | 13000/36718 [00:01<00:02, 9741.02 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  41%|████      | 15000/36718 [00:01<00:02, 9989.06 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  44%|████▎     | 16000/36718 [00:01<00:02, 9757.82 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  46%|████▋     | 17000/36718 [00:01<00:02, 9714.67 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  49%|████▉     | 18000/36718 [00:01<00:01, 9770.46 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  54%|█████▍    | 20000/36718 [00:02<00:01, 10014.86 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  57%|█████▋    | 21000/36718 [00:02<00:01, 9806.40 examples/s] 
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  60%|█████▉    | 22000/36718 [00:02<00:01, 9684.67 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  65%|██████▌   | 24000/36718 [00:02<00:01, 10118.28 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  71%|███████   | 26000/36718 [00:02<00:01, 10181.86 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  76%|███████▋  | 28000/36718 [00:02<00:00, 9624.13 examples/s] 
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  82%|████████▏ | 30000/36718 [00:03<00:00, 9772.10 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  84%|████████▍ | 31000/36718 [00:03<00:00, 9407.59 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  87%|████████▋ | 32000/36718 [00:03<00:00, 9364.33 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  90%|████████▉ | 33000/36718 [00:03<00:00, 9256.00 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  93%|█████████▎| 34000/36718 [00:03<00:00, 6560.72 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  95%|█████████▌| 35000/36718 [00:03<00:00, 7182.24 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing train dataset:  98%|█████████▊| 36000/36718 [00:03<00:00, 7544.29 examples/s]
+Tokenizing train dataset: 100%|██████████| 36718/36718 [00:03<00:00, 9210.50 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:   0%|          | 0/23767 [00:00<?, ? examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:   8%|▊         | 2000/23767 [00:00<00:01, 14765.09 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  17%|█▋        | 4000/23767 [00:00<00:01, 15361.85 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  25%|██▌       | 6000/23767 [00:00<00:01, 14835.08 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  34%|███▎      | 8000/23767 [00:00<00:01, 14701.87 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  42%|████▏     | 10000/23767 [00:00<00:00, 14663.84 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  50%|█████     | 12000/23767 [00:00<00:00, 14383.32 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  59%|█████▉    | 14000/23767 [00:00<00:00, 14563.75 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  67%|██████▋   | 16000/23767 [00:01<00:00, 15151.50 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  76%|███████▌  | 18000/23767 [00:01<00:00, 14460.42 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  84%|████████▍ | 20000/23767 [00:01<00:00, 14529.71 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Packing tokens into 1024-token blocks:  93%|█████████▎| 22000/23767 [00:01<00:00, 14290.56 examples/s]
+Packing tokens into 1024-token blocks: 100%|██████████| 23767/23767 [00:01<00:00, 14396.53 examples/s]
+Packing tokens into 1024-token blocks: 100%|██████████| 23767/23767 [00:01<00:00, 14555.12 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing validation dataset:   0%|          | 0/3760 [00:00<?, ? examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing validation dataset:  27%|██▋       | 1000/3760 [00:00<00:00, 9777.78 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m Tokenizing validation dataset:  53%|█████▎    | 2000/3760 [00:00<00:00, 9118.59 examples/s]
+Tokenizing validation dataset:  80%|███████▉  | 3000/3760 [00:00<00:00, 9105.44 examples/s]
+Tokenizing validation dataset: 100%|██████████| 3760/3760 [00:00<00:00, 9220.93 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m Packing validation tokens into 1024-token blocks:   0%|          | 0/2461 [00:00<?, ? examples/s]
+Packing validation tokens into 1024-token blocks:  81%|████████▏ | 2000/2461 [00:00<00:00, 14141.71 examples/s]
+Packing validation tokens into 1024-token blocks: 100%|██████████| 2461/2461 [00:00<00:00, 14004.55 examples/s]
+[36m(nebius-ddp-training, pid=3073)[0m [transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/500 [00:00<?, ?it/s][transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 1/500 [00:01<14:02,  1.69s/it]
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 2/500 [00:01<07:00,  1.18it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   1%|          | 3/500 [00:02<04:47,  1.73it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   1%|          | 4/500 [00:02<03:44,  2.21it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   1%|          | 5/500 [00:02<03:09,  2.61it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   1%|          | 6/500 [00:02<02:48,  2.93it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   1%|▏         | 7/500 [00:03<02:35,  3.17it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   2%|▏         | 8/500 [00:03<02:26,  3.36it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   2%|▏         | 9/500 [00:03<02:20,  3.49it/s][Comm] step=10 avg_step_time_s=0.2599 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+  2%|▏         | 10/500 [00:04<02:16,  3.59it/s]ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO cudaDriverVersion 13010
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NCCL version 2.28.9+cuda13.0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NET/Plugin: Loaded net plugin NCCL RDMA Plugin v11 (v11)
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NET/Plugin: Loaded collnet plugin SHARP (v11)
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Successfully loaded external network plugin /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Plugin Path : /opt/hpcx/nccl_rdma_sharp_plugin/lib/libnccl-net.so
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO P2P plugin v11 IBext_v11
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NET/IB : No device found.
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NET/IB : Using [RO]; OOB eth0:10.32.21.34<0>
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Failed to initialize NET plugin IBext_v11
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NET/IB : No device found.
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NET/IB : Using [RO]; OOB eth0:10.32.21.34<0>
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Failed to initialize NET plugin IB
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NET/Socket : Using [0]eth0:10.32.21.34<0>
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Initialized NET plugin Socket
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Assigned NET plugin Socket to comm
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Using network Socket
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO ncclCommInitRankConfig comm 0x42972e10 rank 0 nranks 1 cudaDev 0 nvmlDev 0 busId 8d000 commId 0x3a33991eb497a705 - Init START
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO RAS client listening socket at ::1<28028>
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'eth0'
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 0 is 0-15. (GPU affinity = 0-15 ; CPU affinity = 0-15).
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO comm 0x42972e10 rank 0 nRanks 1 nNodes 1 localRanks 1 localRank 0 MNNVL 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 00/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 01/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 02/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 03/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 04/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 05/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 06/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 07/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 08/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 09/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 10/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 11/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 12/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 13/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 14/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 15/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 16/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 17/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 18/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 19/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 20/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 21/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 22/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 23/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 24/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 25/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 26/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 27/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 28/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 29/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 30/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 31/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 32/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 33/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 34/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 35/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 36/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 37/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 38/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 39/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 40/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 41/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 42/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 43/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 44/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 45/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 46/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 47/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 48/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 49/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 50/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 51/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 52/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 53/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 54/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 55/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 56/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 57/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 58/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 59/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 60/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 61/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 62/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Channel 63/64 : 0
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Trees [0] -1/-1/-1->0->-1 [1] -1/-1/-1->0->-1 [2] -1/-1/-1->0->-1 [3] -1/-1/-1->0->-1 [4] -1/-1/-1->0->-1 [5] -1/-1/-1->0->-1 [6] -1/-1/-1->0->-1 [7] -1/-1/-1->0->-1 [8] -1/-1/-1->0->-1 [9] -1/-1/-1->0->-1 [10] -1/-1/-1->0->-1 [11] -1/-1/-1->0->-1 [12] -1/-1/-1->0->-1 [13] -1/-1/-1->0->-1 [14] -1/-1/-1->0->-1 [15] -1/-1/-1->0->-1 [16] -1/-1/-1->0->-1 [17] -1/-1/-1->0->-1 [18] -1/-1/-1->0->-1 [19] -1/-1/-1->0->-1 [20] -1/-1/-1->0->-1 [21] -1/-1/-1->0->-1 [22] -1/-1/-1->0->-1 [23] -1/-1/-1->0->-1 [24] -1/-1/-1->0->-1 [25] -1/-1/-1->0->-1 [26] -1/-1/-1->0->-1 [27] -1/-1/-1->0->-1 [28] -1/-1/-1->0->-1 [29] -1/-1/-1->0->-1 [30] -1/-1/-1->0->-1 [31] -1/-1/-1->0->-1 [32] -1/-1/-1->0->-1 [33] -1/-1/-1->0->-1 [34] -1/-1/-1->0->-1 [35] -1/-1/-1->0->-1 [36] -1/-1/-1->0->-1 [37] -1/-1/-1->0->-1 [38] -1/-1/-1->0->-1 [39] -1/-1/-1->0->-1 [40] -1/-1/-1->0->-1 [41] -1/-1/-1->0->-1 [42] -1/-1/-1->0->-1 [43] -1/-1/-1->0->-1 [44] -1/-1/-1->0->-1 [45] -1/-1/-1->0->-1 [46] -1/-1/-1-
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO P2P Chunksize set to 524288
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Check P2P Type isAllDirectP2p 1 directMode 0 isAllCudaP2p 1
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:10945 [0] NCCL INFO [Proxy Service] Device 0 CPU core 12
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:10946 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 14
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO 64 coll channels, 64 collnet channels, 0 nvls channels, 64 p2p channels, 64 p2p channels per peer
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO CC Off, workFifoBytes 1048576
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO ncclCommInitRankConfig comm 0x42972e10 rank 0 nranks 1 cudaDev 0 nvmlDev 0 busId 8d000 commId 0x3a33991eb497a705 - Init COMPLETE
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 1 total 0.31 (kernels 0.29, alloc 0.00, bootstrap 0.00, allgathers 0.00, topo 0.00, graphs 0.00, connections 0.01, rest 0.00)
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                
+{'loss': '10.96', 'grad_norm': '7.938', 'learning_rate': '7.2e-07', 'epoch': '0.0339'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   2%|▏         | 10/500 [00:04<02:16,  3.59it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   2%|▏         | 11/500 [00:04<03:01,  2.70it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   2%|▏         | 12/500 [00:04<02:44,  2.97it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 13/500 [00:05<02:32,  3.19it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 14/500 [00:05<02:24,  3.36it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 15/500 [00:05<02:18,  3.49it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 16/500 [00:05<02:14,  3.59it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 17/500 [00:06<02:11,  3.66it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   4%|▎         | 18/500 [00:06<02:10,  3.71it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   4%|▍         | 19/500 [00:06<02:08,  3.75it/s][Comm] step=20 avg_step_time_s=0.2925 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+  4%|▍         | 20/500 [00:06<02:07,  3.77it/s]
+                                                
+{'loss': '10.47', 'grad_norm': '5.239', 'learning_rate': '1.52e-06', 'epoch': '0.0678'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   4%|▍         | 20/500 [00:06<02:07,  3.77it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   4%|▍         | 21/500 [00:07<02:06,  3.79it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   4%|▍         | 22/500 [00:07<02:05,  3.80it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   5%|▍         | 23/500 [00:07<02:05,  3.81it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   5%|▍         | 24/500 [00:07<02:04,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   5%|▌         | 25/500 [00:08<02:04,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   5%|▌         | 26/500 [00:08<02:03,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   5%|▌         | 27/500 [00:08<02:03,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 28/500 [00:09<02:03,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 29/500 [00:09<02:02,  3.84it/s][Comm] step=30 avg_step_time_s=0.2605 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+  6%|▌         | 30/500 [00:09<02:02,  3.84it/s]
+                                                
+{'loss': '9.772', 'grad_norm': '3.786', 'learning_rate': '2e-06', 'epoch': '0.1017'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 30/500 [00:09<02:02,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 31/500 [00:09<02:02,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▋         | 32/500 [00:10<02:01,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   7%|▋         | 33/500 [00:10<02:01,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   7%|▋         | 34/500 [00:10<02:01,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   7%|▋         | 35/500 [00:10<02:01,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   7%|▋         | 36/500 [00:11<02:00,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   7%|▋         | 37/500 [00:11<02:00,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 38/500 [00:11<02:00,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 39/500 [00:11<02:00,  3.84it/s][Comm] step=40 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+  8%|▊         | 40/500 [00:12<01:59,  3.84it/s]
+                                                
+{'loss': '9.314', 'grad_norm': '3.448', 'learning_rate': '1.996e-06', 'epoch': '0.1356'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 40/500 [00:12<01:59,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 41/500 [00:12<01:59,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 42/500 [00:12<01:59,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   9%|▊         | 43/500 [00:12<01:58,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   9%|▉         | 44/500 [00:13<01:58,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   9%|▉         | 45/500 [00:13<01:58,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   9%|▉         | 46/500 [00:13<01:58,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   9%|▉         | 47/500 [00:13<01:57,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  10%|▉         | 48/500 [00:14<01:57,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  10%|▉         | 49/500 [00:14<01:57,  3.84it/s][Comm] step=50 avg_step_time_s=0.2605 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 10%|█         | 50/500 [00:14<01:57,  3.84it/s]
+                                                
+{'loss': '9.05', 'grad_norm': '2.806', 'learning_rate': '1.987e-06', 'epoch': '0.1695'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 50/500 [00:14<01:57,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 63.23it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:04, 57.86it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:04, 56.36it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:03, 56.06it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 55.52it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 55.24it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 54.76it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 53.83it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:01<00:03, 53.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 52.06it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 52.69it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 53.27it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 53.70it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:03, 53.97it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 54.30it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 54.40it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 54.47it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:02<00:02, 54.40it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 54.23it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 53.88it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 53.81it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 53.83it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:02, 54.13it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 54.24it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 54.45it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 54.49it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:03<00:01, 54.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 54.58it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 54.27it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 54.30it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 54.21it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:01, 54.32it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 54.32it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 52.99it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 52.48it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:04<00:00, 52.81it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 53.64it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 53.58it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 53.79it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 54.37it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 55.58it/s][A
+                                                
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '8.457', 'eval_runtime': '5.095', 'eval_samples_per_second': '48.87', 'eval_steps_per_second': '48.87', 'epoch': '0.1695'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 10%|█         | 50/500 [00:19<01:57,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 55.58it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 51/500 [00:20<13:24,  1.79s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 52/500 [00:20<09:56,  1.33s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  11%|█         | 53/500 [00:20<07:31,  1.01s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  11%|█         | 54/500 [00:20<05:50,  1.27it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  11%|█         | 55/500 [00:21<04:39,  1.59it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  11%|█         | 56/500 [00:21<03:49,  1.93it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  11%|█▏        | 57/500 [00:21<03:15,  2.27it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  12%|█▏        | 58/500 [00:21<02:50,  2.59it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  12%|█▏        | 59/500 [00:22<02:33,  2.87it/s][Comm] step=60 avg_step_time_s=0.7709 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 12%|█▏        | 60/500 [00:22<02:21,  3.10it/s]
+                                                
+{'loss': '8.872', 'grad_norm': '2.639', 'learning_rate': '1.975e-06', 'epoch': '0.2034'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  12%|█▏        | 60/500 [00:22<02:21,  3.10it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  12%|█▏        | 61/500 [00:22<02:13,  3.29it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  12%|█▏        | 62/500 [00:22<02:07,  3.44it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 63/500 [00:23<02:03,  3.55it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 64/500 [00:23<01:59,  3.64it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 65/500 [00:23<01:57,  3.69it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 66/500 [00:24<01:56,  3.74it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 67/500 [00:24<01:54,  3.77it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  14%|█▎        | 68/500 [00:24<01:53,  3.79it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  14%|█▍        | 69/500 [00:24<01:53,  3.81it/s][Comm] step=70 avg_step_time_s=0.2603 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 14%|█▍        | 70/500 [00:25<01:52,  3.82it/s]
+                                                
+{'loss': '8.808', 'grad_norm': '2.512', 'learning_rate': '1.958e-06', 'epoch': '0.2373'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  14%|█▍        | 70/500 [00:25<01:52,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  14%|█▍        | 71/500 [00:25<01:52,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  14%|█▍        | 72/500 [00:25<01:51,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▍        | 73/500 [00:25<01:51,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▍        | 74/500 [00:26<01:51,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 75/500 [00:26<01:50,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 76/500 [00:26<01:50,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 77/500 [00:26<01:50,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  16%|█▌        | 78/500 [00:27<01:49,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  16%|█▌        | 79/500 [00:27<01:49,  3.84it/s][Comm] step=80 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 16%|█▌        | 80/500 [00:27<01:49,  3.84it/s]
+                                                
+{'loss': '8.753', 'grad_norm': '2.523', 'learning_rate': '1.937e-06', 'epoch': '0.2712'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  16%|█▌        | 80/500 [00:27<01:49,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  16%|█▌        | 81/500 [00:27<01:49,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  16%|█▋        | 82/500 [00:28<01:48,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  17%|█▋        | 83/500 [00:28<01:48,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  17%|█▋        | 84/500 [00:28<01:48,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  17%|█▋        | 85/500 [00:28<01:48,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  17%|█▋        | 86/500 [00:29<01:47,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  17%|█▋        | 87/500 [00:29<01:47,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 88/500 [00:29<01:47,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 89/500 [00:30<01:47,  3.84it/s][Comm] step=90 avg_step_time_s=0.2606 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 18%|█▊        | 90/500 [00:30<01:46,  3.84it/s]
+                                                
+{'loss': '8.701', 'grad_norm': '2.346', 'learning_rate': '1.912e-06', 'epoch': '0.3051'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 90/500 [00:30<01:46,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 91/500 [00:30<01:46,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 92/500 [00:30<01:46,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  19%|█▊        | 93/500 [00:31<01:45,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  19%|█▉        | 94/500 [00:31<01:45,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  19%|█▉        | 95/500 [00:31<01:45,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  19%|█▉        | 96/500 [00:31<01:45,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  19%|█▉        | 97/500 [00:32<01:44,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  20%|█▉        | 98/500 [00:32<01:44,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  20%|█▉        | 99/500 [00:32<01:44,  3.83it/s][Comm] step=100 avg_step_time_s=0.2605 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 20%|██        | 100/500 [00:32<01:44,  3.84it/s]
+                                                 
+{'loss': '8.667', 'grad_norm': '2.363', 'learning_rate': '1.883e-06', 'epoch': '0.339'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 20%|██        | 100/500 [00:32<01:44,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 63.12it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:04, 57.64it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:04, 56.35it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:03, 56.16it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 56.17it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 56.15it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 56.14it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 55.94it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:00<00:03, 56.02it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 55.76it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 55.86it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 55.98it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 56.00it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:02, 55.94it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 55.55it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 55.60it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 55.97it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:01<00:02, 55.97it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 55.77it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 55.71it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 55.73it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 55.63it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:01, 55.77it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 55.64it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 55.65it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 55.38it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:02<00:01, 55.30it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 55.09it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 54.57it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 53.41it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 53.32it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:01, 53.18it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 53.15it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 52.92it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 53.05it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:03<00:00, 53.29it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 53.63it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 54.57it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 55.11it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 55.76it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 56.61it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '8.061', 'eval_runtime': '4.529', 'eval_samples_per_second': '54.97', 'eval_steps_per_second': '54.97', 'epoch': '0.339'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 20%|██        | 100/500 [00:37<01:44,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 56.61it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 101/500 [00:37<10:46,  1.62s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 102/500 [00:37<08:02,  1.21s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  21%|██        | 103/500 [00:38<06:07,  1.08it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  21%|██        | 104/500 [00:38<04:47,  1.38it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  21%|██        | 105/500 [00:38<03:51,  1.70it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  21%|██        | 106/500 [00:38<03:12,  2.04it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  21%|██▏       | 107/500 [00:39<02:45,  2.38it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 108/500 [00:39<02:26,  2.68it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 109/500 [00:39<02:12,  2.95it/s][Comm] step=110 avg_step_time_s=0.7137 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 22%|██▏       | 110/500 [00:40<02:03,  3.17it/s]
+                                                 
+{'loss': '8.599', 'grad_norm': '2.502', 'learning_rate': '1.85e-06', 'epoch': '0.3729'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 110/500 [00:40<02:03,  3.17it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 111/500 [00:40<01:56,  3.34it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 112/500 [00:40<01:51,  3.48it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  23%|██▎       | 113/500 [00:40<01:48,  3.58it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  23%|██▎       | 114/500 [00:41<01:45,  3.65it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  23%|██▎       | 115/500 [00:41<01:43,  3.71it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  23%|██▎       | 116/500 [00:41<01:42,  3.75it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  23%|██▎       | 117/500 [00:41<01:41,  3.78it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  24%|██▎       | 118/500 [00:42<01:40,  3.80it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  24%|██▍       | 119/500 [00:42<01:39,  3.81it/s][Comm] step=120 avg_step_time_s=0.2603 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 24%|██▍       | 120/500 [00:42<01:39,  3.82it/s]
+                                                 
+{'loss': '8.519', 'grad_norm': '2.587', 'learning_rate': '1.813e-06', 'epoch': '0.4068'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  24%|██▍       | 120/500 [00:42<01:39,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  24%|██▍       | 121/500 [00:42<01:39,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  24%|██▍       | 122/500 [00:43<01:38,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 123/500 [00:43<01:38,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 124/500 [00:43<01:38,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▌       | 125/500 [00:43<01:37,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▌       | 126/500 [00:44<01:37,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▌       | 127/500 [00:44<01:37,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  26%|██▌       | 128/500 [00:44<01:36,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  26%|██▌       | 129/500 [00:44<01:36,  3.84it/s][Comm] step=130 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 26%|██▌       | 130/500 [00:45<01:36,  3.84it/s]
+                                                 
+{'loss': '8.481', 'grad_norm': '2.593', 'learning_rate': '1.773e-06', 'epoch': '0.4407'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  26%|██▌       | 130/500 [00:45<01:36,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  26%|██▌       | 131/500 [00:45<01:36,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  26%|██▋       | 132/500 [00:45<01:35,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 133/500 [00:46<01:35,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 134/500 [00:46<01:35,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 135/500 [00:46<01:35,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 136/500 [00:46<01:34,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 137/500 [00:47<01:34,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  28%|██▊       | 138/500 [00:47<01:34,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  28%|██▊       | 139/500 [00:47<01:33,  3.84it/s][Comm] step=140 avg_step_time_s=0.2603 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 28%|██▊       | 140/500 [00:47<01:33,  3.84it/s]
+                                                 
+{'loss': '8.427', 'grad_norm': '2.368', 'learning_rate': '1.729e-06', 'epoch': '0.4746'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  28%|██▊       | 140/500 [00:47<01:33,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  28%|██▊       | 141/500 [00:48<01:33,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  28%|██▊       | 142/500 [00:48<01:33,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  29%|██▊       | 143/500 [00:48<01:33,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  29%|██▉       | 144/500 [00:48<01:32,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  29%|██▉       | 145/500 [00:49<01:32,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  29%|██▉       | 146/500 [00:49<01:32,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  29%|██▉       | 147/500 [00:49<01:31,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 148/500 [00:49<01:31,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 149/500 [00:50<01:31,  3.84it/s][Comm] step=150 avg_step_time_s=0.2605 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 30%|███       | 150/500 [00:50<01:31,  3.84it/s]
+                                                 
+{'loss': '8.394', 'grad_norm': '2.26', 'learning_rate': '1.682e-06', 'epoch': '0.5085'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 30%|███       | 150/500 [00:50<01:31,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 65.00it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:03, 59.51it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:03, 58.03it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:03, 57.07it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 56.65it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 56.33it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 56.32it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 55.87it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:00<00:03, 55.90it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 55.89it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 55.30it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 55.54it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 55.71it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:02, 55.58it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 55.44it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 55.55it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 55.68it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:01<00:02, 55.50it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 55.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 55.59it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 55.71it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 55.64it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:01, 55.19it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 55.60it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 55.86it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 55.80it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:02<00:01, 55.82it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 55.75it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 55.28it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 55.35it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 55.24it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:00, 55.27it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 55.09it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 55.19it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 55.43it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:03<00:00, 55.41it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 55.52it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 55.50it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 55.57it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 55.92it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 56.48it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '7.617', 'eval_runtime': '4.486', 'eval_samples_per_second': '55.5', 'eval_steps_per_second': '55.5', 'epoch': '0.5085'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 30%|███       | 150/500 [00:54<01:31,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 56.48it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m  30%|███       | 151/500 [00:55<09:20,  1.61s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  30%|███       | 152/500 [00:55<06:58,  1.20s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  31%|███       | 153/500 [00:55<05:19,  1.09it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  31%|███       | 154/500 [00:55<04:09,  1.38it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  31%|███       | 155/500 [00:56<03:21,  1.71it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  31%|███       | 156/500 [00:56<02:47,  2.05it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  31%|███▏      | 157/500 [00:56<02:23,  2.39it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 158/500 [00:57<02:06,  2.69it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 159/500 [00:57<01:55,  2.96it/s][Comm] step=160 avg_step_time_s=0.7092 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 32%|███▏      | 160/500 [00:57<01:47,  3.18it/s]
+                                                 
+{'loss': '8.356', 'grad_norm': '2.162', 'learning_rate': '1.632e-06', 'epoch': '0.5424'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 160/500 [00:57<01:47,  3.18it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 161/500 [00:57<01:41,  3.35it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 162/500 [00:58<01:36,  3.49it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  33%|███▎      | 163/500 [00:58<01:33,  3.59it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  33%|███▎      | 164/500 [00:58<01:31,  3.66it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  33%|███▎      | 165/500 [00:58<01:30,  3.71it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  33%|███▎      | 166/500 [00:59<01:29,  3.75it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  33%|███▎      | 167/500 [00:59<01:28,  3.77it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  34%|███▎      | 168/500 [00:59<01:27,  3.79it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  34%|███▍      | 169/500 [00:59<01:26,  3.81it/s][Comm] step=170 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 34%|███▍      | 170/500 [01:00<01:26,  3.82it/s]
+                                                 
+{'loss': '8.213', 'grad_norm': '2.299', 'learning_rate': '1.58e-06', 'epoch': '0.5763'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  34%|███▍      | 170/500 [01:00<01:26,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  34%|███▍      | 171/500 [01:00<01:26,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  34%|███▍      | 172/500 [01:00<01:25,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 173/500 [01:00<01:25,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 174/500 [01:01<01:24,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▌      | 175/500 [01:01<01:24,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▌      | 176/500 [01:01<01:24,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▌      | 177/500 [01:01<01:24,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  36%|███▌      | 178/500 [01:02<01:23,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  36%|███▌      | 179/500 [01:02<01:23,  3.84it/s][Comm] step=180 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 36%|███▌      | 180/500 [01:02<01:23,  3.84it/s]
+                                                 
+{'loss': '8.242', 'grad_norm': '2.224', 'learning_rate': '1.525e-06', 'epoch': '0.6102'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  36%|███▌      | 180/500 [01:02<01:23,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  36%|███▌      | 181/500 [01:03<01:23,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  36%|███▋      | 182/500 [01:03<01:22,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 183/500 [01:03<01:22,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 184/500 [01:03<01:22,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 185/500 [01:04<01:22,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 186/500 [01:04<01:21,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 187/500 [01:04<01:21,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  38%|███▊      | 188/500 [01:04<01:21,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  38%|███▊      | 189/500 [01:05<01:20,  3.84it/s][Comm] step=190 avg_step_time_s=0.2606 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 38%|███▊      | 190/500 [01:05<01:20,  3.84it/s]
+                                                 
+{'loss': '8.232', 'grad_norm': '2.221', 'learning_rate': '1.467e-06', 'epoch': '0.6441'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  38%|███▊      | 190/500 [01:05<01:20,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  38%|███▊      | 191/500 [01:05<01:20,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  38%|███▊      | 192/500 [01:05<01:20,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▊      | 193/500 [01:06<01:19,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 194/500 [01:06<01:19,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 195/500 [01:06<01:19,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 196/500 [01:06<01:19,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 197/500 [01:07<01:18,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  40%|███▉      | 198/500 [01:07<01:18,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  40%|███▉      | 199/500 [01:07<01:18,  3.84it/s][Comm] step=200 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 40%|████      | 200/500 [01:07<01:18,  3.84it/s]
+                                                 
+{'loss': '8.211', 'grad_norm': '2.243', 'learning_rate': '1.408e-06', 'epoch': '0.678'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 40%|████      | 200/500 [01:07<01:18,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 63.77it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:04, 58.35it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:04, 56.90it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:03, 56.05it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 55.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 55.24it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 55.06it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 54.83it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:01<00:03, 54.69it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 54.57it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 55.19it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 55.85it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 56.04it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:03, 52.54it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:03, 51.10it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 51.79it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 52.10it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:02<00:02, 52.91it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 54.11it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 55.00it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 55.39it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 55.84it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:01, 56.41it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 56.60it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 56.52it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 56.54it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:02<00:01, 56.47it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 56.15it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 56.28it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 56.26it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 56.25it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:00, 56.29it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 56.41it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 55.98it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 55.83it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:03<00:00, 56.20it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 56.16it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 56.13it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 56.12it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 56.46it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 57.11it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '7.427', 'eval_runtime': '4.512', 'eval_samples_per_second': '55.19', 'eval_steps_per_second': '55.19', 'epoch': '0.678'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 40%|████      | 200/500 [01:12<01:18,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 57.11it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m  40%|████      | 201/500 [01:12<08:02,  1.61s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  40%|████      | 202/500 [01:12<06:00,  1.21s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  41%|████      | 203/500 [01:13<04:34,  1.08it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  41%|████      | 204/500 [01:13<03:34,  1.38it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  41%|████      | 205/500 [01:13<02:52,  1.71it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  41%|████      | 206/500 [01:14<02:23,  2.05it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  41%|████▏     | 207/500 [01:14<02:03,  2.38it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 208/500 [01:14<01:48,  2.69it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 209/500 [01:14<01:38,  2.95it/s][Comm] step=210 avg_step_time_s=0.7120 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 42%|████▏     | 210/500 [01:15<01:31,  3.17it/s]
+                                                 
+{'loss': '8.125', 'grad_norm': '2.48', 'learning_rate': '1.347e-06', 'epoch': '0.7119'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 210/500 [01:15<01:31,  3.17it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 211/500 [01:15<01:26,  3.34it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 212/500 [01:15<01:22,  3.48it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  43%|████▎     | 213/500 [01:15<01:20,  3.58it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  43%|████▎     | 214/500 [01:16<01:18,  3.65it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  43%|████▎     | 215/500 [01:16<01:17,  3.70it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  43%|████▎     | 216/500 [01:16<01:15,  3.74it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  43%|████▎     | 217/500 [01:16<01:15,  3.77it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▎     | 218/500 [01:17<01:14,  3.79it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 219/500 [01:17<01:13,  3.81it/s][Comm] step=220 avg_step_time_s=0.2607 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 44%|████▍     | 220/500 [01:17<01:13,  3.81it/s]
+                                                 
+{'loss': '8.051', 'grad_norm': '2.371', 'learning_rate': '1.284e-06', 'epoch': '0.7458'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 220/500 [01:17<01:13,  3.81it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 221/500 [01:17<01:13,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 222/500 [01:18<01:12,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  45%|████▍     | 223/500 [01:18<01:12,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  45%|████▍     | 224/500 [01:18<01:12,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  45%|████▌     | 225/500 [01:18<01:11,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  45%|████▌     | 226/500 [01:19<01:11,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  45%|████▌     | 227/500 [01:19<01:11,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  46%|████▌     | 228/500 [01:19<01:10,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  46%|████▌     | 229/500 [01:20<01:10,  3.84it/s][Comm] step=230 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 46%|████▌     | 230/500 [01:20<01:10,  3.84it/s]
+                                                 
+{'loss': '8.09', 'grad_norm': '2.132', 'learning_rate': '1.22e-06', 'epoch': '0.7797'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  46%|████▌     | 230/500 [01:20<01:10,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  46%|████▌     | 231/500 [01:20<01:10,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  46%|████▋     | 232/500 [01:20<01:09,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 233/500 [01:21<01:09,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 234/500 [01:21<01:09,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 235/500 [01:21<01:09,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 236/500 [01:21<01:08,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 237/500 [01:22<01:08,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  48%|████▊     | 238/500 [01:22<01:08,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  48%|████▊     | 239/500 [01:22<01:07,  3.84it/s][Comm] step=240 avg_step_time_s=0.2603 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 48%|████▊     | 240/500 [01:22<01:07,  3.84it/s]
+                                                 
+{'loss': '8.053', 'grad_norm': '2.295', 'learning_rate': '1.155e-06', 'epoch': '0.8136'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  48%|████▊     | 240/500 [01:22<01:07,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  48%|████▊     | 241/500 [01:23<01:07,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  48%|████▊     | 242/500 [01:23<01:07,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▊     | 243/500 [01:23<01:06,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 244/500 [01:23<01:06,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 245/500 [01:24<01:06,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 246/500 [01:24<01:06,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 247/500 [01:24<01:05,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  50%|████▉     | 248/500 [01:24<01:05,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  50%|████▉     | 249/500 [01:25<01:05,  3.83it/s][Comm] step=250 avg_step_time_s=0.2608 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 50%|█████     | 250/500 [01:25<01:05,  3.83it/s]
+                                                 
+{'loss': '8.008', 'grad_norm': '2.175', 'learning_rate': '1.089e-06', 'epoch': '0.8475'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 50%|█████     | 250/500 [01:25<01:05,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 62.73it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:04, 58.32it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:04, 57.00it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:04, 54.99it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 55.38it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 54.59it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 52.72it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 52.69it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:01<00:03, 52.77it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 52.71it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 52.87it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 52.96it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 52.76it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:03, 52.91it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 53.26it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 53.27it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 53.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:02<00:02, 53.53it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 53.29it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 53.06it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 53.20it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 51.77it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:02, 51.46it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 52.11it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 52.43it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 52.43it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:03<00:01, 52.60it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 52.79it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 52.88it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 53.38it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 53.50it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:01, 52.92it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 52.76it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 53.32it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 53.39it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:04<00:00, 54.10it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 54.23it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 54.90it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 55.23it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 55.19it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 56.42it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '7.257', 'eval_runtime': '4.668', 'eval_samples_per_second': '53.34', 'eval_steps_per_second': '53.34', 'epoch': '0.8475'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 50%|█████     | 250/500 [01:30<01:05,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 56.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 [A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.16s/it][A
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.16s/it]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  50%|█████     | 251/500 [01:39<18:14,  4.39s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  50%|█████     | 252/500 [01:39<13:02,  3.15s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████     | 253/500 [01:40<09:24,  2.29s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████     | 254/500 [01:40<06:52,  1.68s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████     | 255/500 [01:40<05:06,  1.25s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████     | 256/500 [01:40<03:53,  1.05it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 257/500 [01:41<03:01,  1.34it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  52%|█████▏    | 258/500 [01:41<02:25,  1.66it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  52%|█████▏    | 259/500 [01:41<02:00,  2.01it/s][Comm] step=260 avg_step_time_s=1.6382 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 52%|█████▏    | 260/500 [01:41<01:42,  2.34it/s]
+                                                 
+{'loss': '8.016', 'grad_norm': '2.161', 'learning_rate': '1.023e-06', 'epoch': '0.8814'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  52%|█████▏    | 260/500 [01:41<01:42,  2.34it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  52%|█████▏    | 261/500 [01:42<01:30,  2.65it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  52%|█████▏    | 262/500 [01:42<01:21,  2.92it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  53%|█████▎    | 263/500 [01:42<01:15,  3.15it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  53%|█████▎    | 264/500 [01:42<01:10,  3.33it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  53%|█████▎    | 265/500 [01:43<01:07,  3.47it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  53%|█████▎    | 266/500 [01:43<01:05,  3.57it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  53%|█████▎    | 267/500 [01:43<01:03,  3.65it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▎    | 268/500 [01:43<01:02,  3.70it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 269/500 [01:44<01:01,  3.74it/s][Comm] step=270 avg_step_time_s=0.2606 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 54%|█████▍    | 270/500 [01:44<01:00,  3.77it/s]
+                                                 
+{'loss': '7.882', 'grad_norm': '2.127', 'learning_rate': '9.57e-07', 'epoch': '0.9153'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 270/500 [01:44<01:00,  3.77it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 271/500 [01:44<01:00,  3.79it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 272/500 [01:45<00:59,  3.81it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  55%|█████▍    | 273/500 [01:45<00:59,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  55%|█████▍    | 274/500 [01:45<00:59,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  55%|█████▌    | 275/500 [01:45<00:58,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  55%|█████▌    | 276/500 [01:46<00:58,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  55%|█████▌    | 277/500 [01:46<00:58,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 278/500 [01:46<00:57,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 279/500 [01:46<00:57,  3.84it/s][Comm] step=280 avg_step_time_s=0.2603 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 56%|█████▌    | 280/500 [01:47<00:57,  3.84it/s]
+                                                 
+{'loss': '7.907', 'grad_norm': '2.197', 'learning_rate': '8.911e-07', 'epoch': '0.9492'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 280/500 [01:47<00:57,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 281/500 [01:47<00:57,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▋    | 282/500 [01:47<00:56,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  57%|█████▋    | 283/500 [01:47<00:56,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  57%|█████▋    | 284/500 [01:48<00:56,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  57%|█████▋    | 285/500 [01:48<00:56,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  57%|█████▋    | 286/500 [01:48<00:55,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  57%|█████▋    | 287/500 [01:48<00:55,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  58%|█████▊    | 288/500 [01:49<00:55,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  58%|█████▊    | 289/500 [01:49<00:54,  3.84it/s][Comm] step=290 avg_step_time_s=0.2607 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 58%|█████▊    | 290/500 [01:49<00:54,  3.84it/s]
+                                                 
+{'loss': '7.905', 'grad_norm': '2.259', 'learning_rate': '8.256e-07', 'epoch': '0.9831'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  58%|█████▊    | 290/500 [01:49<00:54,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  58%|█████▊    | 291/500 [01:49<00:54,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  58%|█████▊    | 292/500 [01:50<00:54,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 293/500 [01:50<00:53,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▉    | 294/500 [01:50<00:53,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▉    | 295/500 [01:50<00:51,  4.02it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▉    | 296/500 [01:51<00:52,  3.90it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▉    | 297/500 [01:51<00:52,  3.89it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  60%|█████▉    | 298/500 [01:51<00:52,  3.87it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  60%|█████▉    | 299/500 [01:52<00:52,  3.86it/s][Comm] step=300 avg_step_time_s=0.2578 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 60%|██████    | 300/500 [01:52<00:51,  3.86it/s]
+                                                 
+{'loss': '7.816', 'grad_norm': '2.092', 'learning_rate': '7.609e-07', 'epoch': '1.017'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 60%|██████    | 300/500 [01:52<00:51,  3.86it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 63.99it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:04, 58.47it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:04, 56.79it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:03, 56.41it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 55.67it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 55.21it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 54.96it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 54.97it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:01<00:03, 54.96it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 54.92it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 54.75it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 54.70it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 54.80it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:02, 54.83it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 54.88it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 54.62it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 54.54it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:01<00:02, 54.19it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 54.14it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 53.80it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 53.65it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 53.61it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:02, 53.67it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 53.82it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 53.88it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 54.15it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:02<00:01, 54.40it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 54.44it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 54.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 54.17it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 54.02it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:01, 54.25it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 54.67it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 54.39it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 54.70it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:03<00:00, 54.82it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 55.18it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 55.48it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 55.38it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 55.53it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 56.00it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '7.121', 'eval_runtime': '4.568', 'eval_samples_per_second': '54.51', 'eval_steps_per_second': '54.51', 'epoch': '1.017'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 60%|██████    | 300/500 [01:56<00:51,  3.86it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 56.00it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m  60%|██████    | 301/500 [01:57<05:24,  1.63s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  60%|██████    | 302/500 [01:57<04:01,  1.22s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 303/500 [01:57<03:03,  1.07it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 304/500 [01:57<02:23,  1.37it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 305/500 [01:58<01:54,  1.70it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 306/500 [01:58<01:35,  2.04it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████▏   | 307/500 [01:58<01:21,  2.37it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  62%|██████▏   | 308/500 [01:58<01:11,  2.68it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  62%|██████▏   | 309/500 [01:59<01:04,  2.95it/s][Comm] step=310 avg_step_time_s=0.7172 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 62%|██████▏   | 310/500 [01:59<00:59,  3.17it/s]
+                                                 
+{'loss': '7.822', 'grad_norm': '2.088', 'learning_rate': '6.973e-07', 'epoch': '1.051'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  62%|██████▏   | 310/500 [01:59<00:59,  3.17it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  62%|██████▏   | 311/500 [01:59<00:56,  3.34it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  62%|██████▏   | 312/500 [01:59<00:54,  3.48it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 313/500 [02:00<00:52,  3.58it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 314/500 [02:00<00:50,  3.65it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 315/500 [02:00<00:49,  3.71it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 316/500 [02:01<00:49,  3.75it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 317/500 [02:01<00:48,  3.77it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  64%|██████▎   | 318/500 [02:01<00:48,  3.79it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  64%|██████▍   | 319/500 [02:01<00:47,  3.80it/s][Comm] step=320 avg_step_time_s=0.2606 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 64%|██████▍   | 320/500 [02:02<00:47,  3.81it/s]
+                                                 
+{'loss': '7.802', 'grad_norm': '2.138', 'learning_rate': '6.35e-07', 'epoch': '1.085'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  64%|██████▍   | 320/500 [02:02<00:47,  3.81it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  64%|██████▍   | 321/500 [02:02<00:46,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  64%|██████▍   | 322/500 [02:02<00:46,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  65%|██████▍   | 323/500 [02:02<00:46,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  65%|██████▍   | 324/500 [02:03<00:45,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  65%|██████▌   | 325/500 [02:03<00:45,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  65%|██████▌   | 326/500 [02:03<00:45,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  65%|██████▌   | 327/500 [02:03<00:45,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 328/500 [02:04<00:44,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 329/500 [02:04<00:44,  3.84it/s][Comm] step=330 avg_step_time_s=0.2606 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 330/500 [02:04<00:44,  3.84it/s]
+                                                 
+{'loss': '7.759', 'grad_norm': '1.988', 'learning_rate': '5.742e-07', 'epoch': '1.119'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 330/500 [02:04<00:44,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 331/500 [02:04<00:44,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▋   | 332/500 [02:05<00:43,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  67%|██████▋   | 333/500 [02:05<00:43,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  67%|██████▋   | 334/500 [02:05<00:43,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  67%|██████▋   | 335/500 [02:05<00:43,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  67%|██████▋   | 336/500 [02:06<00:42,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  67%|██████▋   | 337/500 [02:06<00:42,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 338/500 [02:06<00:42,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 339/500 [02:07<00:42,  3.83it/s][Comm] step=340 avg_step_time_s=0.2608 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 68%|██████▊   | 340/500 [02:07<00:41,  3.84it/s]
+                                                 
+{'loss': '7.73', 'grad_norm': '2.138', 'learning_rate': '5.154e-07', 'epoch': '1.153'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 340/500 [02:07<00:41,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 341/500 [02:07<00:41,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 342/500 [02:07<00:41,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  69%|██████▊   | 343/500 [02:08<00:40,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  69%|██████▉   | 344/500 [02:08<00:40,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  69%|██████▉   | 345/500 [02:08<00:40,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  69%|██████▉   | 346/500 [02:08<00:40,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  69%|██████▉   | 347/500 [02:09<00:39,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  70%|██████▉   | 348/500 [02:09<00:39,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  70%|██████▉   | 349/500 [02:09<00:39,  3.84it/s][Comm] step=350 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 70%|███████   | 350/500 [02:09<00:39,  3.84it/s]
+                                                 
+{'loss': '7.78', 'grad_norm': '2.064', 'learning_rate': '4.586e-07', 'epoch': '1.186'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 70%|███████   | 350/500 [02:09<00:39,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 63.01it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:04, 58.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:03, 57.32it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:03, 56.68it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 55.90it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 55.89it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 55.85it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 55.80it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:00<00:03, 55.99it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 55.58it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 55.70it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 55.51it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 55.51it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:02, 55.68it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 55.59it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 55.39it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 55.47it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:01<00:02, 54.35it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 54.53it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 54.77it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 55.26it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 55.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:01, 55.58it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 55.59it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 55.73it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 55.56it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:02<00:01, 55.77it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 55.64it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 53.85it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 52.82it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 53.76it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:01, 54.27it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 54.37it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 54.49it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 54.80it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:03<00:00, 54.89it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 54.98it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 55.37it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 54.79it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 53.89it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 54.95it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '7.04', 'eval_runtime': '4.535', 'eval_samples_per_second': '54.9', 'eval_steps_per_second': '54.9', 'epoch': '1.186'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 70%|███████   | 350/500 [02:14<00:39,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 54.95it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m  70%|███████   | 351/500 [02:14<04:01,  1.62s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  70%|███████   | 352/500 [02:14<02:59,  1.21s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 353/500 [02:15<02:16,  1.08it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 354/500 [02:15<01:46,  1.37it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 355/500 [02:15<01:25,  1.70it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 356/500 [02:15<01:10,  2.04it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████▏  | 357/500 [02:16<01:00,  2.37it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  72%|███████▏  | 358/500 [02:16<00:52,  2.68it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  72%|███████▏  | 359/500 [02:16<00:47,  2.94it/s][Comm] step=360 avg_step_time_s=0.7147 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 72%|███████▏  | 360/500 [02:17<00:44,  3.17it/s]
+                                                 
+{'loss': '7.753', 'grad_norm': '2.103', 'learning_rate': '4.042e-07', 'epoch': '1.22'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  72%|███████▏  | 360/500 [02:17<00:44,  3.17it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  72%|███████▏  | 361/500 [02:17<00:41,  3.34it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  72%|███████▏  | 362/500 [02:17<00:39,  3.48it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 363/500 [02:17<00:38,  3.57it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 364/500 [02:18<00:37,  3.65it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 365/500 [02:18<00:36,  3.70it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 366/500 [02:18<00:35,  3.74it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 367/500 [02:18<00:35,  3.77it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  74%|███████▎  | 368/500 [02:19<00:34,  3.79it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  74%|███████▍  | 369/500 [02:19<00:34,  3.81it/s][Comm] step=370 avg_step_time_s=0.2607 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 74%|███████▍  | 370/500 [02:19<00:34,  3.82it/s]
+                                                 
+{'loss': '7.762', 'grad_norm': '2.129', 'learning_rate': '3.524e-07', 'epoch': '1.254'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  74%|███████▍  | 370/500 [02:19<00:34,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  74%|███████▍  | 371/500 [02:19<00:33,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  74%|███████▍  | 372/500 [02:20<00:33,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  75%|███████▍  | 373/500 [02:20<00:33,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  75%|███████▍  | 374/500 [02:20<00:32,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  75%|███████▌  | 375/500 [02:20<00:32,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  75%|███████▌  | 376/500 [02:21<00:32,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  75%|███████▌  | 377/500 [02:21<00:32,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 378/500 [02:21<00:31,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 379/500 [02:21<00:31,  3.83it/s][Comm] step=380 avg_step_time_s=0.2608 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 76%|███████▌  | 380/500 [02:22<00:31,  3.83it/s]
+                                                 
+{'loss': '7.708', 'grad_norm': '2.006', 'learning_rate': '3.035e-07', 'epoch': '1.288'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 380/500 [02:22<00:31,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 381/500 [02:22<00:31,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▋  | 382/500 [02:22<00:30,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  77%|███████▋  | 383/500 [02:23<00:30,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  77%|███████▋  | 384/500 [02:23<00:30,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  77%|███████▋  | 385/500 [02:23<00:29,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  77%|███████▋  | 386/500 [02:23<00:29,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  77%|███████▋  | 387/500 [02:24<00:29,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 388/500 [02:24<00:29,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 389/500 [02:24<00:28,  3.84it/s][Comm] step=390 avg_step_time_s=0.2604 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 390/500 [02:24<00:28,  3.84it/s]
+                                                 
+{'loss': '7.768', 'grad_norm': '1.973', 'learning_rate': '2.576e-07', 'epoch': '1.322'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 390/500 [02:24<00:28,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 391/500 [02:25<00:28,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 392/500 [02:25<00:28,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  79%|███████▊  | 393/500 [02:25<00:27,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  79%|███████▉  | 394/500 [02:25<00:27,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  79%|███████▉  | 395/500 [02:26<00:27,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  79%|███████▉  | 396/500 [02:26<00:27,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  79%|███████▉  | 397/500 [02:26<00:26,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  80%|███████▉  | 398/500 [02:26<00:26,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  80%|███████▉  | 399/500 [02:27<00:26,  3.83it/s][Comm] step=400 avg_step_time_s=0.2609 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 80%|████████  | 400/500 [02:27<00:26,  3.83it/s]
+                                                 
+{'loss': '7.763', 'grad_norm': '2.022', 'learning_rate': '2.149e-07', 'epoch': '1.356'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 400/500 [02:27<00:26,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 62.34it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:04, 56.85it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:04, 55.09it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:04, 54.08it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:04, 53.60it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 53.63it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 53.38it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 53.11it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:01<00:03, 51.23it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 52.27it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 52.87it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 53.63it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 53.60it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:03, 53.75it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 53.37it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 53.34it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 53.26it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:02<00:02, 53.53it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 53.59it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 53.73it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 53.55it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 54.03it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:01, 54.72it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 55.27it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 55.21it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 55.19it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:03<00:01, 55.26it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 55.41it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 55.41it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 55.65it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 55.43it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:00, 55.29it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 55.62it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 55.78it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 55.83it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:04<00:00, 55.96it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 56.06it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 56.06it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 55.03it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 54.62it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 55.86it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '7.005', 'eval_runtime': '4.593', 'eval_samples_per_second': '54.21', 'eval_steps_per_second': '54.21', 'epoch': '1.356'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 80%|████████  | 400/500 [02:32<00:26,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 55.86it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 401/500 [02:32<02:42,  1.64s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 402/500 [02:32<02:00,  1.23s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  81%|████████  | 403/500 [02:32<01:30,  1.07it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  81%|████████  | 404/500 [02:33<01:10,  1.36it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  81%|████████  | 405/500 [02:33<00:56,  1.69it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  81%|████████  | 406/500 [02:33<00:46,  2.03it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  81%|████████▏ | 407/500 [02:33<00:39,  2.36it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  82%|████████▏ | 408/500 [02:34<00:34,  2.67it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  82%|████████▏ | 409/500 [02:34<00:31,  2.93it/s][Comm] step=410 avg_step_time_s=0.7203 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 82%|████████▏ | 410/500 [02:34<00:28,  3.16it/s]
+                                                 
+{'loss': '7.726', 'grad_norm': '1.85', 'learning_rate': '1.757e-07', 'epoch': '1.39'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  82%|████████▏ | 410/500 [02:34<00:28,  3.16it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  82%|████████▏ | 411/500 [02:34<00:26,  3.33it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  82%|████████▏ | 412/500 [02:35<00:25,  3.46it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 413/500 [02:35<00:24,  3.56it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 414/500 [02:35<00:23,  3.64it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 415/500 [02:35<00:23,  3.69it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 416/500 [02:36<00:22,  3.74it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 417/500 [02:36<00:22,  3.76it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  84%|████████▎ | 418/500 [02:36<00:21,  3.78it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  84%|████████▍ | 419/500 [02:36<00:21,  3.79it/s][Comm] step=420 avg_step_time_s=0.2612 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 84%|████████▍ | 420/500 [02:37<00:21,  3.81it/s]
+                                                 
+{'loss': '7.756', 'grad_norm': '2.004', 'learning_rate': '1.401e-07', 'epoch': '1.424'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  84%|████████▍ | 420/500 [02:37<00:21,  3.81it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  84%|████████▍ | 421/500 [02:37<00:20,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  84%|████████▍ | 422/500 [02:37<00:20,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▍ | 423/500 [02:38<00:20,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▍ | 424/500 [02:38<00:19,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 425/500 [02:38<00:19,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 426/500 [02:38<00:19,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 427/500 [02:39<00:19,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  86%|████████▌ | 428/500 [02:39<00:18,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  86%|████████▌ | 429/500 [02:39<00:18,  3.84it/s][Comm] step=430 avg_step_time_s=0.2606 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  86%|████████▌ | 430/500 [02:39<00:18,  3.83it/s]
+                                                 
+{'loss': '7.739', 'grad_norm': '2', 'learning_rate': '1.082e-07', 'epoch': '1.458'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  86%|████████▌ | 430/500 [02:39<00:18,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  86%|████████▌ | 431/500 [02:40<00:18,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  86%|████████▋ | 432/500 [02:40<00:17,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  87%|████████▋ | 433/500 [02:40<00:17,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  87%|████████▋ | 434/500 [02:40<00:17,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  87%|████████▋ | 435/500 [02:41<00:16,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  87%|████████▋ | 436/500 [02:41<00:16,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  87%|████████▋ | 437/500 [02:41<00:16,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 438/500 [02:41<00:16,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 439/500 [02:42<00:15,  3.84it/s][Comm] step=440 avg_step_time_s=0.2607 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 88%|████████▊ | 440/500 [02:42<00:15,  3.84it/s]
+                                                 
+{'loss': '7.714', 'grad_norm': '1.993', 'learning_rate': '8.029e-08', 'epoch': '1.492'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 440/500 [02:42<00:15,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 441/500 [02:42<00:15,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 442/500 [02:42<00:15,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  89%|████████▊ | 443/500 [02:43<00:14,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  89%|████████▉ | 444/500 [02:43<00:14,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  89%|████████▉ | 445/500 [02:43<00:14,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  89%|████████▉ | 446/500 [02:44<00:14,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  89%|████████▉ | 447/500 [02:44<00:13,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 448/500 [02:44<00:13,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 449/500 [02:44<00:13,  3.84it/s][Comm] step=450 avg_step_time_s=0.2603 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 90%|█████████ | 450/500 [02:45<00:13,  3.84it/s]
+                                                 
+{'loss': '7.698', 'grad_norm': '1.943', 'learning_rate': '5.635e-08', 'epoch': '1.525'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 90%|█████████ | 450/500 [02:45<00:13,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 64.17it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:03, 58.77it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:04, 57.04it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:03, 56.22it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 56.13it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 55.72it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 55.44it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 55.15it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:01<00:03, 54.92it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 54.60it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 54.74it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 54.37it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 54.36it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:02, 54.72it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 54.78it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 54.92it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 54.88it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:01<00:02, 54.94it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 55.03it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 54.96it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 55.07it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 55.09it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:01, 55.09it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 54.90it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 55.02it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 55.08it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:02<00:01, 54.98it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 54.86it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 54.81it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 54.86it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 54.89it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:01, 54.78it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 54.87it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 55.21it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 55.47it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:03<00:00, 55.56it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 55.71it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 55.52it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 55.75it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 55.27it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 55.83it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '6.992', 'eval_runtime': '4.533', 'eval_samples_per_second': '54.93', 'eval_steps_per_second': '54.93', 'epoch': '1.525'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 90%|█████████ | 450/500 [02:49<00:13,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 55.83it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m  90%|█████████ | 451/500 [02:49<01:19,  1.62s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  90%|█████████ | 452/500 [02:50<00:58,  1.21s/it]
+[36m(nebius-ddp-training, pid=3073)[0m  91%|█████████ | 453/500 [02:50<00:43,  1.08it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  91%|█████████ | 454/500 [02:50<00:33,  1.37it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  91%|█████████ | 455/500 [02:50<00:26,  1.70it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  91%|█████████ | 456/500 [02:51<00:21,  2.04it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  91%|█████████▏| 457/500 [02:51<00:18,  2.37it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 458/500 [02:51<00:15,  2.68it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 459/500 [02:51<00:13,  2.95it/s][Comm] step=460 avg_step_time_s=0.7144 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 92%|█████████▏| 460/500 [02:52<00:12,  3.17it/s]
+                                                 
+{'loss': '7.743', 'grad_norm': '2.103', 'learning_rate': '3.654e-08', 'epoch': '1.559'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 460/500 [02:52<00:12,  3.17it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 461/500 [02:52<00:11,  3.34it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 462/500 [02:52<00:10,  3.47it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  93%|█████████▎| 463/500 [02:53<00:10,  3.57it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  93%|█████████▎| 464/500 [02:53<00:09,  3.65it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  93%|█████████▎| 465/500 [02:53<00:09,  3.69it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  93%|█████████▎| 466/500 [02:53<00:09,  3.73it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  93%|█████████▎| 467/500 [02:54<00:08,  3.76it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  94%|█████████▎| 468/500 [02:54<00:08,  3.78it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  94%|█████████▍| 469/500 [02:54<00:08,  3.80it/s][Comm] step=470 avg_step_time_s=0.2612 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 94%|█████████▍| 470/500 [02:54<00:07,  3.81it/s]
+                                                 
+{'loss': '7.608', 'grad_norm': '2.019', 'learning_rate': '2.095e-08', 'epoch': '1.593'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  94%|█████████▍| 470/500 [02:54<00:07,  3.81it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  94%|█████████▍| 471/500 [02:55<00:07,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  94%|█████████▍| 472/500 [02:55<00:07,  3.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 473/500 [02:55<00:07,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 474/500 [02:55<00:06,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▌| 475/500 [02:56<00:06,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▌| 476/500 [02:56<00:06,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▌| 477/500 [02:56<00:06,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  96%|█████████▌| 478/500 [02:56<00:05,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  96%|█████████▌| 479/500 [02:57<00:05,  3.84it/s][Comm] step=480 avg_step_time_s=0.2607 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 96%|█████████▌| 480/500 [02:57<00:05,  3.84it/s]
+                                                 
+{'loss': '7.624', 'grad_norm': '2.15', 'learning_rate': '9.63e-09', 'epoch': '1.627'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  96%|█████████▌| 480/500 [02:57<00:05,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  96%|█████████▌| 481/500 [02:57<00:04,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  96%|█████████▋| 482/500 [02:57<00:04,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 483/500 [02:58<00:04,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 484/500 [02:58<00:04,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 485/500 [02:58<00:03,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 486/500 [02:59<00:03,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 487/500 [02:59<00:03,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  98%|█████████▊| 488/500 [02:59<00:03,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  98%|█████████▊| 489/500 [02:59<00:02,  3.83it/s][Comm] step=490 avg_step_time_s=0.2609 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+ 98%|█████████▊| 490/500 [03:00<00:02,  3.83it/s]
+                                                 
+{'loss': '7.682', 'grad_norm': '1.88', 'learning_rate': '2.645e-09', 'epoch': '1.661'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  98%|█████████▊| 490/500 [03:00<00:02,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  98%|█████████▊| 491/500 [03:00<00:02,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  98%|█████████▊| 492/500 [03:00<00:02,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  99%|█████████▊| 493/500 [03:00<00:01,  3.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  99%|█████████▉| 494/500 [03:01<00:01,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  99%|█████████▉| 495/500 [03:01<00:01,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  99%|█████████▉| 496/500 [03:01<00:01,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  99%|█████████▉| 497/500 [03:01<00:00,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 100%|█████████▉| 498/500 [03:02<00:00,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 100%|█████████▉| 499/500 [03:02<00:00,  3.84it/s][Comm] step=500 avg_step_time_s=0.2605 cumulative_comm_time_s=0.0000 cumulative_comm_bytes=0
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 500/500 [03:02<00:00,  3.84it/s]
+                                                 
+{'loss': '7.745', 'grad_norm': '1.871', 'learning_rate': '2.187e-11', 'epoch': '1.695'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m 100%|██████████| 500/500 [03:02<00:00,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 65.28it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:03, 59.21it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:03, 57.81it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:03, 57.21it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 56.66it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 56.40it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 56.23it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 56.16it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:00<00:03, 56.05it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 56.29it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 56.23it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 56.14it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 56.07it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:02, 56.08it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 56.06it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 55.97it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 55.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:01<00:02, 55.52it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 55.63it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 55.65it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 55.59it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 55.21it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█████▌    | 140/249 [00:02<00:01, 55.04it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 55.03it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 54.60it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 54.57it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:02<00:01, 54.55it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 54.02it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 54.02it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 53.90it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 53.78it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:01, 53.10it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 52.94it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 52.94it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 53.08it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:03<00:00, 53.28it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 53.09it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 53.40it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 53.42it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 53.79it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|█████████▉| 248/249 [00:04<00:00, 54.15it/s][A
+                                                 
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+[A{'eval_loss': '6.99', 'eval_runtime': '4.558', 'eval_samples_per_second': '54.63', 'eval_steps_per_second': '54.63', 'epoch': '1.695'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 500/500 [03:07<00:00,  3.84it/s]
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 249/249 [00:04<00:00, 54.15it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m                                                  [A
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s][A
+[36m(nebius-ddp-training, pid=3073)[0m 
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.22s/it][A
+Writing model shards: 100%|██████████| 1/1 [00:04<00:00,  4.22s/it]
+[36m(nebius-ddp-training, pid=3073)[0m 
+                                                 
+{'train_runtime': '196.4', 'train_samples_per_second': '20.37', 'train_steps_per_second': '2.546', 'train_loss': '8.232', 'epoch': '1.695'}
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 500/500 [03:16<00:00,  3.84it/s]======================================================================
+[36m(nebius-ddp-training, pid=3073)[0m [Comm] Communication summary
+[36m(nebius-ddp-training, pid=3073)[0m [Comm]   world_size:                              1
+[36m(nebius-ddp-training, pid=3073)[0m [Comm]   trainable parameters:                    774,030,080
+[36m(nebius-ddp-training, pid=3073)[0m [Comm]   theoretical grad payload / step (fp32):   3,096,120,320 bytes
+[36m(nebius-ddp-training, pid=3073)[0m [Comm]   theoretical ring all-reduce bytes/GPU/step:0 bytes
+[36m(nebius-ddp-training, pid=3073)[0m [Comm]   measured total comm time (whole run):     0.0000 s
+[36m(nebius-ddp-training, pid=3073)[0m [Comm]   measured total bytes communicated:        0 bytes
+[36m(nebius-ddp-training, pid=3073)[0m [Comm]   measured avg comm time / all-reduce call: 0.000000 s
+[36m(nebius-ddp-training, pid=3073)[0m [Comm]   measured avg comm time / optimizer step:  0.000000 s
+[36m(nebius-ddp-training, pid=3073)[0m ======================================================================
+[36m(nebius-ddp-training, pid=3073)[0m 
+100%|██████████| 500/500 [03:16<00:00,  2.55it/s]
+[36m(nebius-ddp-training, pid=3073)[0m [Done] Training complete — 500 steps finished.
+[36m(nebius-ddp-training, pid=3073)[0m 
+[36m(nebius-ddp-training, pid=3073)[0m   0%|          | 0/249 [00:00<?, ?it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   3%|▎         | 7/249 [00:00<00:03, 61.78it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   6%|▌         | 14/249 [00:00<00:04, 56.68it/s]
+[36m(nebius-ddp-training, pid=3073)[0m   8%|▊         | 20/249 [00:00<00:04, 55.95it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  10%|█         | 26/249 [00:00<00:04, 55.06it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  13%|█▎        | 32/249 [00:00<00:03, 54.31it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  15%|█▌        | 38/249 [00:00<00:03, 53.90it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  18%|█▊        | 44/249 [00:00<00:03, 53.46it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  20%|██        | 50/249 [00:00<00:03, 53.35it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  22%|██▏       | 56/249 [00:01<00:03, 53.62it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  25%|██▍       | 62/249 [00:01<00:03, 53.48it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  27%|██▋       | 68/249 [00:01<00:03, 53.07it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  30%|██▉       | 74/249 [00:01<00:03, 53.02it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  32%|███▏      | 80/249 [00:01<00:03, 52.95it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  35%|███▍      | 86/249 [00:01<00:03, 52.81it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  37%|███▋      | 92/249 [00:01<00:02, 52.85it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  39%|███▉      | 98/249 [00:01<00:02, 52.67it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  42%|████▏     | 104/249 [00:01<00:02, 52.77it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  44%|████▍     | 110/249 [00:02<00:02, 52.89it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  47%|████▋     | 116/249 [00:02<00:02, 52.96it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  49%|████▉     | 122/249 [00:02<00:02, 52.95it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  51%|█████▏    | 128/249 [00:02<00:02, 53.62it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  54%|█████▍    | 134/249 [00:02<00:02, 54.49it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  56%|█��███▌    | 140/249 [00:02<00:02, 53.99it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  59%|█████▊    | 146/249 [00:02<00:01, 53.62it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  61%|██████    | 152/249 [00:02<00:01, 53.49it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  63%|██████▎   | 158/249 [00:02<00:01, 53.73it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  66%|██████▌   | 164/249 [00:03<00:01, 53.10it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  68%|██████▊   | 170/249 [00:03<00:01, 52.80it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  71%|███████   | 176/249 [00:03<00:01, 52.83it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  73%|███████▎  | 182/249 [00:03<00:01, 52.81it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  76%|███████▌  | 188/249 [00:03<00:01, 52.65it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  78%|███████▊  | 194/249 [00:03<00:01, 52.76it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  80%|████████  | 200/249 [00:03<00:00, 53.82it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  83%|████████▎ | 206/249 [00:03<00:00, 54.51it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  85%|████████▌ | 212/249 [00:03<00:00, 54.96it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  88%|████████▊ | 218/249 [00:04<00:00, 55.23it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  90%|████████▉ | 224/249 [00:04<00:00, 55.14it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  92%|█████████▏| 230/249 [00:04<00:00, 55.21it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  95%|█████████▍| 236/249 [00:04<00:00, 55.37it/s]
+[36m(nebius-ddp-training, pid=3073)[0m  97%|█████████▋| 242/249 [00:04<00:00, 56.05it/s]
+100%|█████████▉| 248/249 [00:04<00:00, 56.97it/s]
+100%|██████████| 249/249 [00:04<00:00, 54.05it/s]
+[36m(nebius-ddp-training, pid=3073)[0m ======================================================================
+[36m(nebius-ddp-training, pid=3073)[0m [Inference] Final evaluation (inference) performance
+[36m(nebius-ddp-training, pid=3073)[0m [Inference]   eval_loss: 6.989786148071289
+[36m(nebius-ddp-training, pid=3073)[0m [Inference]   eval_runtime: 4.6394
+[36m(nebius-ddp-training, pid=3073)[0m [Inference]   eval_samples_per_second: 53.671
+[36m(nebius-ddp-training, pid=3073)[0m [Inference]   eval_steps_per_second: 53.671
+[36m(nebius-ddp-training, pid=3073)[0m [Inference]   epoch: 1.694915254237288
+[36m(nebius-ddp-training, pid=3073)[0m ======================================================================
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO comm 0x42972e10 rank 0 nranks 1 cudaDev 0 busId 8d000 - Destroy COMPLETE
+[36m(nebius-ddp-training, pid=3073)[0m ddp-1gpu-cf229bdf-head:4725:4725 [0] NCCL INFO ENV/Plugin: Closing env plugin ncclEnvDefault
+[36m(nebius-ddp-training, pid=3073)[0m + __skypilot_user_exit_code=0
+[36m(nebius-ddp-training, pid=3073)[0m ++ findmnt -t fuse.rclone --noheading
+[36m(nebius-ddp-training, pid=3073)[0m ++ wc -l
+[36m(nebius-ddp-training, pid=3073)[0m + '[' 0 -gt 0 ']'
+[36m(nebius-ddp-training, pid=3073)[0m + exit 0
+[0m[32m✓ Job finished (status: SUCCEEDED).[0m[0m

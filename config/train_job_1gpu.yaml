@@ -1,0 +1,57 @@
+name: nebius-ddp-training
+
+workdir: .
+
+resources:
+  infra: k8s/nebius-mk8s-fuchsia-fox-cluster-2-e00jbnk07zpftpqwsd
+  accelerators: "H100:1"
+  memory: "60+"
+  image_id: docker:efiradware/nebius-trainer:v1
+
+num_nodes: 1
+
+envs:
+  TRAIN_SCRIPT: "train.py"
+  MAX_STEPS: "500"
+  BLOCK_SIZE: "1024"
+  PER_DEVICE_TRAIN_BATCH_SIZE: "8"
+  PER_DEVICE_EVAL_BATCH_SIZE: "1"
+  GRADIENT_ACCUMULATION_STEPS: "1"
+  DATALOADER_NUM_WORKERS: "4"
+  TOKENIZERS_PARALLELISM: "false"
+  NCCL_DEBUG: INFO
+  NCCL_DEBUG_SUBSYS: INIT,NET
+
+setup: |
+  echo "Setup complete"
+  nvidia-smi || true
+
+run: |
+  set -euxo pipefail
+
+  MASTER_ADDR=$(echo "$SKYPILOT_NODE_IPS" | head -n 1)
+  MASTER_PORT=29500
+
+  echo "SKYPILOT_NODE_RANK=${SKYPILOT_NODE_RANK}"
+  echo "SKYPILOT_NUM_NODES=${SKYPILOT_NUM_NODES}"
+  echo "SKYPILOT_NUM_GPUS_PER_NODE=${SKYPILOT_NUM_GPUS_PER_NODE}"
+  echo "SKYPILOT_NODE_IPS:"
+  echo "$SKYPILOT_NODE_IPS"
+  echo "MASTER_ADDR=${MASTER_ADDR}"
+  echo "PWD=$(pwd)"
+  test -f "${TRAIN_SCRIPT}"
+
+  echo "=== Script verification ==="
+  grep -E "n_layer|n_embd|n_head|n_positions" "${TRAIN_SCRIPT}"
+  echo "PER_DEVICE_TRAIN_BATCH_SIZE=${PER_DEVICE_TRAIN_BATCH_SIZE}"
+  echo "MAX_STEPS=${MAX_STEPS}"
+  echo "=========================="
+
+  torchrun \
+    --nproc_per_node=${SKYPILOT_NUM_GPUS_PER_NODE} \
+    --nnodes=${SKYPILOT_NUM_NODES} \
+    --node_rank=${SKYPILOT_NODE_RANK} \
+    --master_addr=${MASTER_ADDR} \
+    --master_port=${MASTER_PORT} \
+    "${TRAIN_SCRIPT}"
+

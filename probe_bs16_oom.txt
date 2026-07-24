@@ -1,0 +1,166 @@
+[33mTailing logs of the last job on cluster 'ddp-probe'...[0m
+Job ID not provided. Streaming the logs of the latest job.
+[2m├── [0m[2mWaiting for task resources on 1 node.[0m
+[2m└── [0mJob started. Streaming logs... [2m(Ctrl-C to exit log streaming; job will not be killed)[0m
+[36m(setup pid=3221)[0m Setup complete
+[36m(setup pid=3221)[0m Thu Jul 23 08:29:14 2026       
+[36m(setup pid=3221)[0m +-----------------------------------------------------------------------------------------+
+[36m(setup pid=3221)[0m | NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.1     |
+[36m(setup pid=3221)[0m +-----------------------------------------+------------------------+----------------------+
+[36m(setup pid=3221)[0m | GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+[36m(setup pid=3221)[0m | Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+[36m(setup pid=3221)[0m |                                         |                        |               MIG M. |
+[36m(setup pid=3221)[0m |=========================================+========================+======================|
+[36m(setup pid=3221)[0m |   0  NVIDIA H100 80GB HBM3          On  |   00000000:8D:00.0 Off |                    0 |
+[36m(setup pid=3221)[0m | N/A   28C    P0             68W /  700W |       0MiB /  81559MiB |      0%      Default |
+[36m(setup pid=3221)[0m |                                         |                        |             Disabled |
+[36m(setup pid=3221)[0m +-----------------------------------------+------------------------+----------------------+
+[36m(setup pid=3221)[0m 
+[36m(setup pid=3221)[0m +-----------------------------------------------------------------------------------------+
+[36m(setup pid=3221)[0m | Processes:                                                                              |
+[36m(setup pid=3221)[0m |  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+[36m(setup pid=3221)[0m |        ID   ID                                                               Usage      |
+[36m(setup pid=3221)[0m |=========================================================================================|
+[36m(setup pid=3221)[0m |  No running processes found                                                             |
+[36m(setup pid=3221)[0m +-----------------------------------------------------------------------------------------+
+[36m(nebius-ddp-training, pid=3221)[0m ++ echo 10.36.36.94
+[36m(nebius-ddp-training, pid=3221)[0m ++ head -n 1
+[36m(nebius-ddp-training, pid=3221)[0m + MASTER_ADDR=10.36.36.94
+[36m(nebius-ddp-training, pid=3221)[0m + MASTER_PORT=29500
+[36m(nebius-ddp-training, pid=3221)[0m + echo SKYPILOT_NODE_RANK=0
+[36m(nebius-ddp-training, pid=3221)[0m SKYPILOT_NODE_RANK=0
+[36m(nebius-ddp-training, pid=3221)[0m + echo SKYPILOT_NUM_NODES=1
+[36m(nebius-ddp-training, pid=3221)[0m SKYPILOT_NUM_NODES=1
+[36m(nebius-ddp-training, pid=3221)[0m + echo SKYPILOT_NUM_GPUS_PER_NODE=1
+[36m(nebius-ddp-training, pid=3221)[0m SKYPILOT_NUM_GPUS_PER_NODE=1
+[36m(nebius-ddp-training, pid=3221)[0m + echo SKYPILOT_NODE_IPS:
+[36m(nebius-ddp-training, pid=3221)[0m SKYPILOT_NODE_IPS:
+[36m(nebius-ddp-training, pid=3221)[0m + echo 10.36.36.94
+[36m(nebius-ddp-training, pid=3221)[0m 10.36.36.94
+[36m(nebius-ddp-training, pid=3221)[0m + echo MASTER_ADDR=10.36.36.94
+[36m(nebius-ddp-training, pid=3221)[0m MASTER_ADDR=10.36.36.94
+[36m(nebius-ddp-training, pid=3221)[0m ++ pwd
+[36m(nebius-ddp-training, pid=3221)[0m + echo PWD=/root/sky_workdir
+[36m(nebius-ddp-training, pid=3221)[0m PWD=/root/sky_workdir
+[36m(nebius-ddp-training, pid=3221)[0m + test -f train.py
+[36m(nebius-ddp-training, pid=3221)[0m + echo '=== Script verification ==='
+[36m(nebius-ddp-training, pid=3221)[0m === Script verification ===
+[36m(nebius-ddp-training, pid=3221)[0m + grep --color=auto -E 'n_layer|n_embd|n_head|n_positions' train.py
+[36m(nebius-ddp-training, pid=3221)[0m         n_positions=1024,        # GPT-2 standard context window length
+[36m(nebius-ddp-training, pid=3221)[0m         n_embd=1280,             # Hidden dimension size (GPT-2 base/small)
+[36m(nebius-ddp-training, pid=3221)[0m         n_layer=36,              # Number of transformer layers (GPT-2 base/small)
+[36m(nebius-ddp-training, pid=3221)[0m         n_head=20,               # Number of attention heads (GPT-2 base/small)
+[36m(nebius-ddp-training, pid=3221)[0m + echo PER_DEVICE_TRAIN_BATCH_SIZE=16
+[36m(nebius-ddp-training, pid=3221)[0m PER_DEVICE_TRAIN_BATCH_SIZE=16
+[36m(nebius-ddp-training, pid=3221)[0m + echo MAX_STEPS=20
+[36m(nebius-ddp-training, pid=3221)[0m MAX_STEPS=20
+[36m(nebius-ddp-training, pid=3221)[0m + echo ==========================
+[36m(nebius-ddp-training, pid=3221)[0m ==========================
+[36m(nebius-ddp-training, pid=3221)[0m + torchrun --nproc_per_node=1 --nnodes=1 --node_rank=0 --master_addr=10.36.36.94 --master_port=29500 train.py
+[36m(nebius-ddp-training, pid=3221)[0m /usr/local/lib/python3.12/dist-packages/torch/library.py:356: UserWarning: Warning only once for all operators,  other operators may also be overridden.
+[36m(nebius-ddp-training, pid=3221)[0m   Overriding a previously registered kernel for the same operator and the same dispatch key
+[36m(nebius-ddp-training, pid=3221)[0m   operator: flash_attn::_flash_attn_backward(Tensor dout, Tensor q, Tensor k, Tensor v, Tensor out, Tensor softmax_lse, Tensor(a6!)? dq, Tensor(a7!)? dk, Tensor(a8!)? dv, float dropout_p, float softmax_scale, bool causal, SymInt window_size_left, SymInt window_size_right, float softcap, Tensor? alibi_slopes, bool deterministic, Tensor? rng_state=None) -> Tensor
+[36m(nebius-ddp-training, pid=3221)[0m     registered at /usr/local/lib/python3.12/dist-packages/torch/_library/custom_ops.py:922
+[36m(nebius-ddp-training, pid=3221)[0m   dispatch key: ADInplaceOrView
+[36m(nebius-ddp-training, pid=3221)[0m   previous kernel: no debug info
+[36m(nebius-ddp-training, pid=3221)[0m        new kernel: registered at /usr/local/lib/python3.12/dist-packages/torch/_library/custom_ops.py:922 (Triggered internally at /opt/pytorch/pytorch/aten/src/ATen/core/dispatch/OperatorEntry.cpp:208.)
+[36m(nebius-ddp-training, pid=3221)[0m   self.m.impl(
+[36m(nebius-ddp-training, pid=3221)[0m [NCCL] Distributed training initialised
+[36m(nebius-ddp-training, pid=3221)[0m [NCCL] World size: 1
+[36m(nebius-ddp-training, pid=3221)[0m [NCCL] Backend: nccl
+[36m(nebius-ddp-training, pid=3221)[0m [NCCL] Master addr: 10.36.36.94
+[36m(nebius-ddp-training, pid=3221)[0m [NCCL] Master port: 29500
+[36m(nebius-ddp-training, pid=3221)[0m [Rank 0] Loading tokenizer: gpt2
+[36m(nebius-ddp-training, pid=3221)[0m Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[36m(nebius-ddp-training, pid=3221)[0m [Comm] Trainable parameters: 774,030,080
+[36m(nebius-ddp-training, pid=3221)[0m [Comm] Theoretical grad payload / step (fp32): 3,096,120,320 bytes
+[36m(nebius-ddp-training, pid=3221)[0m [Comm] Theoretical ring all-reduce bytes/GPU/step: 0 bytes
+[36m(nebius-ddp-training, pid=3221)[0m [transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+[36m(nebius-ddp-training, pid=3221)[0m 
+[36m(nebius-ddp-training, pid=3221)[0m   0%|          | 0/20 [00:00<?, ?it/s][transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+[36m(nebius-ddp-training, pid=3221)[0m 
+[36m(nebius-ddp-training, pid=3221)[0m   5%|▌         | 1/20 [00:01<00:19,  1.04s/it][rank0]: Traceback (most recent call last):
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/root/sky_workdir/train.py", line 306, in <module>
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     main()
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/root/sky_workdir/train.py", line 287, in main
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     trainer.train()
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/transformers/trainer.py", line 1427, in train
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     return inner_training_loop(
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/transformers/trainer.py", line 1509, in _inner_training_loop
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     self._run_epoch(
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/transformers/trainer.py", line 1737, in _run_epoch
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/transformers/trainer.py", line 1909, in training_step
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/transformers/trainer.py", line 1981, in compute_loss
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     outputs = model(**inputs)
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:               ^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     return self._call_impl(*args, **kwargs)
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     return forward_call(*args, **kwargs)
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/accelerate/utils/operations.py", line 823, in forward
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     return model_forward(*args, **kwargs)
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/accelerate/utils/operations.py", line 811, in __call__
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     return convert_to_fp32(self.model_forward(*args, **kwargs))
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     return func(*args, **kwargs)
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/transformers/utils/generic.py", line 903, in wrapper
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     output = func(self, *args, **kwargs)
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/transformers/models/gpt2/modeling_gpt2.py", line 711, in forward
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     loss = self.loss_function(
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:            ^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:   File "/usr/local/lib/python3.12/dist-packages/transformers/loss/loss_utils.py", line 58, in ForCausalLMLoss
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:     logits = logits.float()
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:              ^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.07 GiB. GPU 0 has a total capacity of 79.18 GiB of which 2.17 GiB is free. Including non-PyTorch memory, this process has 77.00 GiB memory in use. Of the allocated memory 72.50 GiB is allocated by PyTorch, and 3.76 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[36m(nebius-ddp-training, pid=3221)[0m 
+  5%|▌         | 1/20 [00:21<06:49, 21.56s/it]
+[36m(nebius-ddp-training, pid=3221)[0m [rank0]:[W723 08:29:55.033372954 ProcessGroupNCCL.cpp:1564] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+[36m(nebius-ddp-training, pid=3221)[0m ddp-probe-cf229bdf-head:222113:231849 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+[36m(nebius-ddp-training, pid=3221)[0m ddp-probe-cf229bdf-head:222113:222113 [0] NCCL INFO ENV/Plugin: Closing env plugin ncclEnvDefault
+[36m(nebius-ddp-training, pid=3221)[0m E0723 08:29:55.861000 221839 torch/distributed/elastic/multiprocessing/api.py:978] failed (exitcode: 1) local_rank: 0 (pid: 222113) of binary: /usr/bin/python
+[36m(nebius-ddp-training, pid=3221)[0m Traceback (most recent call last):
+[36m(nebius-ddp-training, pid=3221)[0m   File "/usr/local/bin/torchrun", line 7, in <module>
+[36m(nebius-ddp-training, pid=3221)[0m     sys.exit(main())
+[36m(nebius-ddp-training, pid=3221)[0m              ^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m   File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+[36m(nebius-ddp-training, pid=3221)[0m     return f(*args, **kwargs)
+[36m(nebius-ddp-training, pid=3221)[0m            ^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m   File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 982, in main
+[36m(nebius-ddp-training, pid=3221)[0m     run(args)
+[36m(nebius-ddp-training, pid=3221)[0m   File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 973, in run
+[36m(nebius-ddp-training, pid=3221)[0m     elastic_launch(
+[36m(nebius-ddp-training, pid=3221)[0m   File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 165, in __call__
+[36m(nebius-ddp-training, pid=3221)[0m     return launch_agent(self._config, self._entrypoint, list(args))
+[36m(nebius-ddp-training, pid=3221)[0m            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[36m(nebius-ddp-training, pid=3221)[0m   File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 313, in launch_agent
+[36m(nebius-ddp-training, pid=3221)[0m     raise ChildFailedError(
+[36m(nebius-ddp-training, pid=3221)[0m torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+[36m(nebius-ddp-training, pid=3221)[0m ============================================================
+[36m(nebius-ddp-training, pid=3221)[0m train.py FAILED
+[36m(nebius-ddp-training, pid=3221)[0m ------------------------------------------------------------
+[36m(nebius-ddp-training, pid=3221)[0m Failures:
+[36m(nebius-ddp-training, pid=3221)[0m   <NO_OTHER_FAILURES>
+[36m(nebius-ddp-training, pid=3221)[0m ------------------------------------------------------------
+[36m(nebius-ddp-training, pid=3221)[0m Root Cause (first observed failure):
+[36m(nebius-ddp-training, pid=3221)[0m [0]:
+[36m(nebius-ddp-training, pid=3221)[0m   time      : 2026-07-23_08:29:55
+[36m(nebius-ddp-training, pid=3221)[0m   host      : ddp-probe-cf229bdf-head
+[36m(nebius-ddp-training, pid=3221)[0m   rank      : 0 (local_rank: 0)
+[36m(nebius-ddp-training, pid=3221)[0m   exitcode  : 1 (pid: 222113)
+[36m(nebius-ddp-training, pid=3221)[0m   error_file: <N/A>
+[36m(nebius-ddp-training, pid=3221)[0m   traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[36m(nebius-ddp-training, pid=3221)[0m ============================================================
+ERROR: [31mJob 3 failed with return code list:[0m [1] 
+[0m[32m✓ Job finished (status: FAILED).[0m[0m
+command terminated with exit code 100
