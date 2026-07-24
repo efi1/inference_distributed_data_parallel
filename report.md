@@ -101,7 +101,7 @@ step. Steps are not a fair unit of comparison between the two runs, which the ti
 
 ## 4. Loss vs. wall-clock time — the fair comparison
 
-![Loss vs time](graphs/loss_vs_time.png)
+<img src="graphs/loss_vs_time.png" width="700">
 
 Converting steps to seconds using each run's own `train_runtime` reverses the
 picture entirely. The 1-GPU run reaches loss ≈ 7.6 in under 200 seconds. The
