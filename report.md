@@ -82,7 +82,7 @@ before `torchrun` starts, confirming the correct script reached the pods.
 
 ## 3. Loss vs. steps
 
-![Loss vs steps](graphs/loss_vs_steps.png)
+<img src="graphs/loss_vs_steps.png" width="700">
 
 Both curves descend from ~11.0 to the mid-7s over 500 steps. They track each
 other closely, with the 4-GPU curve running slightly below the 1-GPU curve from
