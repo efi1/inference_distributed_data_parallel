@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.venv/
+skypilot-env/
+sky_logs/
